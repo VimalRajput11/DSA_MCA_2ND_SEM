@@ -113,7 +113,7 @@ void insert_at_position(struct node **headref, int data, int pos)
 void deletion_at_end(struct node **headref)
 {
     if (*headref == NULL)
-    {
+    { 
         printf("List is empty.\n");
         return;
     }
@@ -142,9 +142,9 @@ void deletion_at_position(struct node **headref, int pos)
         struct node *to_delete = *headref;
         while (temp->next != *headref)
         {
-            temp = temp->next;
+            temp = temp->next; 
         }
-        if (temp == *headref) // Only one node in the list
+        if (temp == *headref) 
         {
             *headref = NULL;
         }

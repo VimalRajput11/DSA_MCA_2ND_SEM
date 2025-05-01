@@ -53,7 +53,7 @@ void insert_at_position(struct node **headref, int data, int pos)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = data;
-    newnode->next = NULL;
+    newnode->next = NULL;    
     newnode->prev = NULL;
 
     if (*headref == NULL)
@@ -62,7 +62,7 @@ void insert_at_position(struct node **headref, int data, int pos)
     }
 
     if (pos <= 1)
-    {
+    {printf("Position is less than or equal to 1. Inserting at the head.\n");
         newnode->next = *headref;
         (*headref)->prev = newnode;
         *headref = newnode;
@@ -71,12 +71,13 @@ void insert_at_position(struct node **headref, int data, int pos)
     {
 
         struct node *temp = *headref;
-        for (int i = 1; i < pos - 1 && temp != NULL; i++)
+        for (int i = 1; i < pos - 1 && temp->next != NULL; i++)
         {
             temp = temp->next;
         }
-        if (temp == NULL)
-        {
+        if (temp== NULL)
+    
+        {printf("Position is out of bounds. Inserting at the end.\n");
             temp->next = newnode;
             newnode->prev = temp;
         }
@@ -135,7 +136,7 @@ void deletion_at_position(struct node **headref, int pos)
         temp = temp->next;
     }
     if (temp->next == NULL)
-    {
+    { printf("Position out of range. Deleting at the end.\n");
         temp->prev->next = NULL;
         free(temp);
     }
