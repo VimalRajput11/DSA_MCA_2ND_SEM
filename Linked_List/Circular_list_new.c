@@ -77,32 +77,18 @@ void insert_at_position(struct node **headref, int data, int pos)
     if (pos <= 1 || *headref == NULL)
     {
         printf("Position is less than or equal to 1. Inserting at the head.\n");
-        if (*headref == NULL)
-        {
-            *headref = newnode;
-            newnode->next = newnode;
-        }
-        else
-        {
-            struct node *temp = *headref;
-            while (temp->next != *headref)
-            {
-                temp = temp->next;
-            }
-            newnode->next = *headref;
-            temp->next = newnode;
-            *headref = newnode;
-        }
+        newnode->next = *headref;
+        *headref = newnode;
         return;
     }
 
     struct node *temp = *headref;
-    for (int i = 1; i < pos - 1 && temp->next != *headref; i++)
+    for (int i = 1; i < pos - 1 && temp->next != NULL; i++)
     {
         temp = temp->next;
     }
 
-    if (temp->next == *headref)
+    if (temp->next == NULL)
     {
         printf("Position is out of bounds. Inserting at the end.\n");
     }
@@ -113,7 +99,7 @@ void insert_at_position(struct node **headref, int data, int pos)
 void deletion_at_end(struct node **headref)
 {
     if (*headref == NULL)
-    { 
+    {
         printf("List is empty.\n");
         return;
     }
@@ -142,9 +128,9 @@ void deletion_at_position(struct node **headref, int pos)
         struct node *to_delete = *headref;
         while (temp->next != *headref)
         {
-            temp = temp->next; 
+            temp = temp->next;
         }
-        if (temp == *headref) 
+        if (temp == *headref) // Only one node in the list
         {
             *headref = NULL;
         }
@@ -165,13 +151,8 @@ void deletion_at_position(struct node **headref, int pos)
         if (temp == *headref)
         {
             printf("Position out of range. Deleting at the end.\n");
-            struct node *end_temp = *headref;
-            while (end_temp->next->next != *headref)
-            {
-                end_temp = end_temp->next;
-            }
-            free(end_temp->next);
-            end_temp->next = *headref;
+            prev->next = *headref;
+            free(temp);
             return;
         }
     }

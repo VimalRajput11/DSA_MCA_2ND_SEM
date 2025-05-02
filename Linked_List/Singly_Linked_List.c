@@ -80,7 +80,7 @@ void insert_at_pos(struct node **headref, int data, int pos)
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = data;
     newnode->next = NULL;
-    if (pos <= 1)
+    if (pos<=1)
     {
         newnode->next = *headref;
         *headref = newnode;
@@ -93,17 +93,8 @@ void insert_at_pos(struct node **headref, int data, int pos)
     }
     if (temp == NULL)
     {
-        temp = *headref;
-        if (temp == NULL)
-        {
-            *headref = newnode;
-            return;
-        }
-        while (temp->next != NULL)
-        {
-            temp = temp->next;
-        }
-        temp->next = newnode;
+        printf("Position out of bounds.\n");
+        free(newnode);
         return;
     }
     newnode->next = temp->next;
@@ -118,42 +109,49 @@ void del_at_pos(struct node **headref, int pos)
         return;
     }
     struct node *temp = *headref;
-    if (pos<= 1)
+    if (pos == 1)
     {
         *headref = (*headref)->next;
         free(temp);
         return;
     }
-    struct node *prev = NULL;
-    for (int i = 1; i < pos && temp != NULL; i++)
+    for (int i = 1; i < pos - 1 && temp != NULL; i++)
     {
-        prev = temp;
         temp = temp->next;
     }
-
-    if (temp == NULL) 
+    if (temp == NULL || temp->next == NULL)
     {
-        temp = *headref;
-        if (temp->next == NULL) 
+        if (temp != NULL && temp->next == NULL) 
         {
-            free(temp);
-            *headref = NULL;
-            return;
+            if (*headref == NULL)
+            {
+                printf("List is empty.\n");
+                return;
+            }
+            struct node *temp = *headref;
+            if (temp->next == NULL)
+            {
+                free(temp);
+                *headref = NULL;
+                return;
+            }
+            while (temp->next->next != NULL)
+            {
+                temp = temp->next;
+            }
+            free(temp->next);
+            temp->next = NULL;
         }
-        while (temp->next->next != NULL) 
+        else
         {
-            temp = temp->next;
+            printf("Position out of bounds.\n");
         }
-        free(temp->next);
-        temp->next = NULL;
+        return;
     }
-    else
-    {
-        prev->next = temp->next;
-        free(temp);
-    }
+    struct node *ptr = temp->next;
+    temp->next = ptr->next;
+    free(ptr);
 }
-
 void Count_Nodes(struct node *temp)
 {
     int count = 0;
@@ -221,7 +219,7 @@ int main()
             scanf("%d", &pos_del);
             del_at_pos(&head, pos_del);
             break;
-        case 9:
+            case 9:
             Count_Nodes(head);
             break;
         case 10:
