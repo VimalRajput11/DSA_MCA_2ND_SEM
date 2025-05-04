@@ -7,6 +7,15 @@ struct node
     struct node *next;
 } *head = NULL;
 
+void insert_at_beginning(struct node **headref, int data);
+void insert_at_end(struct node **headref, int data);
+void deletion_at_beginning(struct node **headref);
+void insert_at_position(struct node **headref, int data, int pos);
+void deletion_at_end(struct node **headref);
+void deletion_at_position(struct node **headref, int pos);
+void display(struct node *head);
+
+
 void insert_at_beginning(struct node **headref, int data)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
