@@ -92,7 +92,7 @@ void insert_at_beginning(struct node **headref, int data)
     else
     {
         newnode->next = *headref;
-        (*headref)->prev = newnode;
+        (*headref)->prev = newnode;  
         *headref = newnode;
     }
 }
