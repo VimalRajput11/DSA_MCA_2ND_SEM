@@ -9,11 +9,6 @@ struct node{
 void push(struct node **Topref,int data)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
-    if (newnode == NULL)
-    {
-        printf("Stack overflow\n");
-        return;
-    }
     newnode->data = data;
     newnode->next = *Topref;
     *Topref = newnode;
