@@ -6,7 +6,47 @@ struct node{
     struct node *next;
 }*Top=NULL;
 
-void push(struct node **Topref,int data)
+void push(struct node **Topref, int data);
+void pop(struct node **Topref);
+void display();
+ 
+int main(){
+    int choice, data;
+    while (1)
+    {
+        printf("\nMenu\n");
+        printf("1.Push\n");
+        printf("2.Pop\n");
+        printf("3.Display\n");
+        printf("4.Exit\n");
+
+        printf("Enter the choice:");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the data to insert:");
+            scanf("%d", &data);
+            push(&Top,data);
+            break;
+        case 2:
+            pop(&Top);
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            exit(1);
+
+        default:
+            printf("Invalid Choice");
+        }
+    }
+    return 0;
+}
+
+void push(struct node **Topref, int data)
 {
     struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = data;
@@ -42,40 +82,4 @@ void display()
         temp = temp->next;
     }
     printf("\n");
-}
-
-int main(){
-    int choice, data;
-    while (1)
-    {
-        printf("\nMenu\n");
-        printf("1.Push\n");
-        printf("2.Pop\n");
-        printf("3.Display\n");
-        printf("4.Exit\n");
-
-        printf("Enter the choice:");
-        scanf("%d", &choice);
-
-        switch (choice)
-        {
-        case 1:
-            printf("Enter the data to insert:");
-            scanf("%d", &data);
-            push(&Top,data);
-            break;
-        case 2:
-            pop(&Top);
-            break;
-        case 3:
-            display();
-            break;
-        case 4:
-            exit(1);
-
-        default:
-            printf("Invalid Choice");
-        }
-    }
-    return 0;
 }

@@ -2,8 +2,22 @@
 #include <stdlib.h>
 #include <ctype.h>
 #define SIZE 100
+int precedenceValue(char symbol);
+int isOperator(char symbol);
+void push(char symbol);
+char pop();
+void infixToPostfix(char infix[], char result[]);
 int top = -1;
 char stack[SIZE];
+
+int main() {
+    char infix[SIZE], result[SIZE];
+    printf("Enter an infix expression: ");
+    scanf("%s", infix);
+    infixToPostfix(infix, result);
+    printf("Postfix expression: %s\n", result);
+    return 0;
+}
 
 int precedenceValue(char symbol) {
     switch (symbol) {
@@ -31,6 +45,7 @@ void push(char symbol) {
     }
     stack[++top] = symbol;
 }
+
 char pop() {
     if (top == -1) {
         printf("Stack underflow\n");
@@ -44,7 +59,6 @@ void infixToPostfix(char infix[], char result[]) {
     char symbol;
     while (infix[i] != '\0') {
         symbol = infix[i];
-
         if (isalnum(symbol)) {
             result[j++] = symbol;
         } else if (symbol == '(') {
@@ -53,7 +67,7 @@ void infixToPostfix(char infix[], char result[]) {
             while (top != -1 && stack[top] != '(') {
                 result[j++] = pop();
             }
-            pop(); // pop '('
+            pop(); 
         } else if (isOperator(symbol)) {
             while (top != -1 && precedenceValue(stack[top]) >= precedenceValue(symbol)) {
                 result[j++] = pop();
@@ -66,13 +80,4 @@ void infixToPostfix(char infix[], char result[]) {
         result[j++] = pop();
     }
     result[j] = '\0';
-}
-
-int main() {
-    char infix[SIZE], result[SIZE];
-    printf("Enter an infix expression: ");
-    scanf("%s", infix);
-    infixToPostfix(infix, result);
-    printf("Postfix expression: %s\n", result);
-    return 0;
 }

@@ -1,4 +1,4 @@
-// Implementation of merging k sorted linked lists and lists are given in array
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -74,10 +74,9 @@ struct Node *mergeKLists(struct Node **lists, int k)
 
 int main()
 {
-    int k = 3; // Number of linked lists
+    int k = 3; 
     struct Node *lists[k];
 
-    // Initialize the linked lists
     lists[0] = NULL;
     Linked_List(&lists[0], 5);
     Linked_List(&lists[0], 3);
@@ -92,14 +91,11 @@ int main()
     Linked_List(&lists[2], 9);
     Linked_List(&lists[2], 7);
 
-    // Display the individual lists
     for (int i = 0; i < k; i++)
     {
         printf("List %d: ", i + 1);
         display(lists[i]);
     }
-
-    // Merge all k lists
     struct Node *merged_list = mergeKLists(lists, k);
     printf("Merged Linked List: \n");
     display(merged_list);
