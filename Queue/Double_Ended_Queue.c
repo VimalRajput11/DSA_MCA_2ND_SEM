@@ -6,12 +6,12 @@ int deque[SIZE];
 int front = -1;
 int rear = -1;
 
-void display();
-void insert_from_front(int value);
-void insertRear(int value);
-void deleteFront();
-void deleteRear();
 
+void insert_from_front(int value);
+void insert_from_rear(int value);
+void delete_from_front();
+void delete_from_rear();
+void display();
 
 int main() {
     int choice, value;
@@ -29,13 +29,13 @@ int main() {
             case 2:
                 printf("Enter value to insert at rear: ");
                 scanf("%d", &value);
-                insertRear(value);
+                insert_from_rear(value);
                 break;
             case 3:
-                deleteFront();
+                delete_from_front();
                 break;
             case 4:
-                deleteRear();
+                delete_from_rear();
                 break;
             case 5:
                 display();
@@ -66,7 +66,7 @@ void insert_from_front(int value) {
     printf("%d inserted at front\n", value);
 }
 
-void insertRear(int value) {
+void insert_from_rear(int value) {
     if ((front == 0 && rear == SIZE - 1) || (front == rear + 1)) {
         printf("Deque is full\n");
     } else if (front == -1) {
@@ -82,7 +82,7 @@ void insertRear(int value) {
     printf("%d inserted at rear\n", value);
 }
 
-void deleteFront() {
+void delete_from_front() {
     if (front == -1) {
         printf("Deque is empty\n");
     } else if (front == rear) {
@@ -97,7 +97,7 @@ void deleteFront() {
     }
 }
 
-void deleteRear() {
+void delete_from_rear() {
     if (front == -1) {
         printf("Deque is empty\n");
     } else if (front == rear) {

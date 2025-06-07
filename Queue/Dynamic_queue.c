@@ -2,19 +2,19 @@
 #include <stdlib.h>
 
 
-struct node{
+struct queue{
     int data;
-    struct node *next;
+    struct queue *next;
 };
 
-void Enqueue(struct node **frontref, struct node **rearref, int value);
-void Dequeue(struct node **frontref, struct node **rearref);
-void display(struct node *front);
+void Enqueue(struct queue **frontref, struct queue **rearref, int value);
+void Dequeue(struct queue **frontref, struct queue **rearref);
+ void display(struct queue *front);
 
 int main(){
     int choice,value;
-    struct node * front =NULL;
-    struct node *rear=NULL;
+    struct queue * front =NULL;
+    struct queue *rear=NULL;
 
     while(1){
         printf("\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
@@ -43,9 +43,9 @@ int main(){
     return 0;
 }
 
-void Enqueue(struct node **frontref, struct node **rearref, int value)
+void Enqueue(struct queue **frontref, struct queue **rearref, int value)
 {
-    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    struct queue *newNode = (struct queue *)malloc(sizeof(struct queue));
     newNode->data = value;
     newNode->next = NULL;
 
@@ -62,14 +62,14 @@ void Enqueue(struct node **frontref, struct node **rearref, int value)
     printf("%d enqueued to queue\n", value);
 }
 
-void Dequeue(struct node **frontref, struct node **rearref)
+void Dequeue(struct queue **frontref, struct queue **rearref)
 {
     if (*frontref == NULL)
     {
         printf("Queue is empty\n");
         return;
     }
-    struct node *temp = *frontref;
+    struct queue *temp = *frontref;
     printf("%d dequeued from queue\n", temp->data);
     *frontref = (*frontref)->next;
     if (*frontref == NULL)
@@ -77,7 +77,7 @@ void Dequeue(struct node **frontref, struct node **rearref)
     free(temp);
 }
 
-void display(struct node *front)
+void display(struct queue *front)
 {
     if (front == NULL)
     {
@@ -85,7 +85,7 @@ void display(struct node *front)
         return;
     }
     printf("Queue elements: ");
-    struct node *temp = front;
+    struct queue *temp = front;
     while (temp != NULL)
     {
         printf("%d ", temp->data);

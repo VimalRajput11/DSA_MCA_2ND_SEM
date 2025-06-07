@@ -55,7 +55,7 @@ void Kth_Swape_Nodes (struct Node **headref, int k)
 
     if (current == NULL || current->next == NULL)
     {
-        printf("Swapping not possible\n");
+        printf("Swapping not possible\n"); 
         return;
     }
 

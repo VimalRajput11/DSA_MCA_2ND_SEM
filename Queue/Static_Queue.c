@@ -1,17 +1,15 @@
-// Implement a static queue using an array
+
 #include <stdio.h>
 #include <stdlib.h>
 #define SIZE 5
 
-
+int queue[SIZE];
+int front = -1;
+int rear = -1;
 
 void Enqueue(int value);
 void Dequeue();
 void display();
-
-int queue[SIZE];
-int front = -1;
-int rear = -1;
 
 int main(){
     int choice,value;

@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include<stdlib.h>
 
-struct node {
+struct queue {
     int data;
-    struct node *next;
+    struct queue *next;
 };
 
 
-void enqueue(struct node **front, struct node **rear, int value);
-void dequeue(struct node **front, struct node **rear);
-void display(struct node *front);
+void enqueue(struct queue **frontref, struct queue **rearref, int value);
+void dequeue(struct queue **frontref, struct queue **rearref);
+void display(struct queue *front);
 
 int main(){
-    struct node * front=NULL;
-    struct node * rear=NULL;
+    struct queue * front=NULL;
+    struct queue * rear=NULL;
     int choice,data;
 
     while(1){
@@ -43,46 +43,46 @@ int main(){
     return 0;
 }
 
-void enqueue(struct node **front, struct node **rear, int value) {
-    struct node *newnode = (struct node *)malloc(sizeof(struct node));
+void enqueue(struct queue **frontref, struct queue **rearref, int value) {
+    struct queue *newnode = (struct queue *)malloc(sizeof(struct queue));
     newnode->data = value;
     newnode->next = NULL;
 
-    if (*front == NULL && *rear == NULL) {
-        *front = newnode;
-        *rear = newnode;
-        newnode->next = *front;
+    if (*frontref == NULL && *rearref == NULL) {
+        *frontref = newnode;
+        *rearref = newnode;
+        newnode->next = *frontref;
     } else {
-        (*rear)->next = newnode;
-        (*rear) = newnode;
-        (*rear)->next = *front;
+        (*rearref)->next = newnode;
+        (*rearref) = newnode;
+        (*rearref)->next = *frontref;
     }
 }
 
-void dequeue(struct node **front, struct node **rear) {
-    if (*front == NULL) {
+void dequeue(struct queue **frontref, struct queue **rearref) {
+    if (*frontref == NULL) {
         printf("Queue is empty\n");
         return;
     }
 
-    struct node *temp = *front;
-    if (*front == *rear) {
-        *front = NULL;
-        *rear = NULL;
+    struct queue *temp = *frontref;
+    if (*frontref == *rearref) {
+        *frontref = NULL;
+        *rearref = NULL;
     } else {
-        *front = (*front)->next;
-        (*rear)->next = *front;
+        *frontref = (*frontref)->next;
+        (*rearref)->next = *frontref;
     }
     free(temp);
 }
 
-void display(struct node *front) {
+void display(struct queue *front) {
     if (front == NULL) {
         printf("Queue is empty\n");
         return;
     }
 
-    struct node *temp = front;
+    struct queue *temp = front;
     do {
         printf("%d ", temp->data);
         temp = temp->next;

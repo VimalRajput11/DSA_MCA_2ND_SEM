@@ -52,8 +52,6 @@ struct Node *mergeKLists(struct Node **lists, int k)
         return NULL;
     if (k == 1)
         return lists[0];
-
-    // Divide and conquer approach
     while (k > 1)
     {
         int i = 0, j = 0;
